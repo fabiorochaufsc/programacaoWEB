@@ -1,0 +1,9 @@
+#Disparar um servidor WEB no diretorio local:
+#se você usa Python 2
+Python 2 — python -m SimpleHTTPServer 8000
+
+#se você usa Python 3
+Python 3 — python -m http.server 8000
+
+
+
