@@ -1,0 +1,84 @@
+
+
+
+
+<html>
+  <head>
+    <title>Gerenciador de Etiquetas</title>
+
+<style>
+.visual {
+  background-color: rgb(200, 200, 200);
+}
+
+#cria {
+	display:none;
+
+}
+#remove {
+        display:none;
+}
+#resultado {
+  background-color: rgb(255, 0, 0);
+
+}
+</style>
+
+  </head>
+
+
+<script>
+
+function lista () {
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+if (this.readyState == 4 && this.status == 200) {
+document.getElementById("resultado").innerHTML = xhttp.responseText;
+}
+};
+xhttp.open("GET", "/lista.php", true);
+xhttp.send();
+}
+
+function cria ()
+{
+	document.getElementById("cria").style.display = "block";
+}
+function remove ()
+{
+	document.getElementById("remove").style.display = "block";
+}
+</script>
+
+
+  <body>
+    <h1>Gerenciador de etiquetas</h1>
+    <button onclick="lista()" >Lista</button>
+    <button onclick="cria()" >Cria</button>
+    <button onclick="remove()" >Remove</button>
+
+    <div id ="resultado">
+asas
+
+asas
+
+    </div>
+
+    <div id="cria">
+    	<form id="cria_etiqueta"  method="GET" action="/cria.php">
+		<input name="numero" type="text"/>
+        	<input name="descricao" type="text"/>
+        	<button type="submit">ENVIA</button>
+    	</form>
+    </div>
+    <div id="remove">
+        <form id="remove_etiqueta"  method="GET" action="/remove.php">
+                <input name="numero" type="text"/>
+                <button type="submit">ENVIA</button>
+        </form>
+    </div>
+
+ 
+
+  </body>
+</html>
