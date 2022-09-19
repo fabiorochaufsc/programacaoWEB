@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<receitas>
+<receita nome="pão" tempo_de_preparo="5 minutos" tempo_de_cozimento="1 hora">
+  <titulo>Pão simples</titulo>
+  <ingredientes>
+    <ingrediente quantidade="3" unidade="xícaras">Farinha de Trigo</ingrediente>
+    <ingrediente quantidade="7" unidade="gramas">Fermento</ingrediente>
+    <ingrediente quantidade="1.5" unidade="xícaras" estado="morna">Água</ingrediente>
+    <ingrediente quantidade="1" unidade="colheres de chá">Sal</ingrediente>
+  </ingredientes>
+  <instrucoes>
+    <passo>Misture todos os ingredientes, e dissolva bem.</passo>
+    <passo>Cubra com um pano e deixe por uma hora em um local morno.</passo>
+    <passo>Misture novamente, coloque numa bandeja e asse num forno.</passo>
+  </instrucoes>
+</receita>
+<receita nome="churrasco" tempo_de_preparo="1 hora" tempo_de_cozimento="2 horas">
+  <titulo>Churrasco tradicional</titulo>
+  <ingredientes>
+    <ingrediente quantidade="1" unidade="quilograma">Carne</ingrediente>
+    <ingrediente quantidade="2" unidade="gramas">Tempero</ingrediente>
+  </ingredientes>
+  <instrucoes>
+    <passo>Tempere a carne</passo>
+    <passo>Coloque na churrasqueira</passo>
+    <passo>Vire a carne periodicamente cuidando para não queimar</passo>
+  </instrucoes>
+</receita>
+
+</receitas>

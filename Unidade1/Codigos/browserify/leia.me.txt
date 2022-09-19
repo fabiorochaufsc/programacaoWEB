@@ -1,0 +1,3 @@
+ 1) browserify math.js add.js -o bundle.js
+ 2) sudo npm install -g uglify-js
+    browserify math.js add.js | uglifyjs > bundle.js

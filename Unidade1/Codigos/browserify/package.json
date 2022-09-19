@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "tinyify": "^3.1.0"
+  },
+  "dependencies": {
+    "uglify-to-browserify": "^2.1.0",
+    "uglifyify": "^5.0.2"
+  }
+}

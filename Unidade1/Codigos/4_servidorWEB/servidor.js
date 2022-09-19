@@ -3,30 +3,22 @@ var app = express();
 
 app.use(express.static(__dirname + '/public'));
 
-
-
-
 app.get('/', function(req, resp) {
-
     console.log('Dentro da primeira parte');
-
-
-    resp.send('oi mundo');
+    resp.send('<H1>oi mundo</H1>');
 });
 
 app.get('/hora', function(req, resp) {
+  console.log(req.query.id);
 
-  console.log(req);
 
 	var d = new Date();
     console.log('Dentro da primeira da hora');
-
-
-       resp.send(d.toString());
-    return resp.end();
+    resp.write(d.toString());
+    resp.end();
 });
 
-///  http://localhost:3000/sensores?temperatura=123
+///  http://localhost:4000/sensores?temperatura=123&humidade=45&id=66
 app.get('/sensores', function(req, resp) {
 
     //console.log(req);
