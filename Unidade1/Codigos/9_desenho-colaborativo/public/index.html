@@ -71,12 +71,12 @@ function enviaAJAX (tipo,msg)
 
         }
     };
-    xhttp.open("GET", "http://localhost:8081/"+tipo+"?conteudo="+msg, true);
+    xhttp.open("GET", "http://localhost:4000/"+tipo+"?conteudo="+msg, true);
     xhttp.send();
 }
 
 
-var es = new EventSource("http://localhost:8080/registra");
+var es = new EventSource("http://localhost:8000/registra");
 
 	es.onopen	  = function()
 	{

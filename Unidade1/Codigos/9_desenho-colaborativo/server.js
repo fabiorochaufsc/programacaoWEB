@@ -29,10 +29,10 @@ function Create2DArray(rows) {
 
 var tela = Create2DArray(300);
 
-appSSE.use(express.static(__dirname + '/public'));
+appCOMANDOS.use(express.static(__dirname + '/public'));
 
 appSSE.get("/registra", (req, res) => {
-	console.log('cliente novo se registrou');
+	s
 	var cliente = SSE(req, res);
 	cliente.onClose(() => console.log("Cliente desconectou"));
     vetorClientes.push(cliente);
@@ -69,4 +69,4 @@ appCOMANDOS.get("/STATUS", (req, res) => {
 
 
 appSSE.listen(8000);
-appCOMANDOS.listen(8081);
+appCOMANDOS.listen(4000);

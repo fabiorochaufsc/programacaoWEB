@@ -1,7 +1,7 @@
 <html>
   <link rel="stylesheet" href="index.css">
 
-
+  <script type="text/javascript" src="reconnecting-websocket.min.js"></script>
 	<body>
 		Aplicacao colaborativa de desenho<br>
     <div>
@@ -26,6 +26,70 @@
       var ctx=areaDesenho.getContext("2d");
       var rect = areaDesenho.getBoundingClientRect();
       var apaga = O("apaga");
+
+var servidorWebserver= 'ws://localhost:10000'
+
+
+var websocket
+
+function startConnection () {
+  websocket = new ReconnectingWebSocket(servidorWebserver)
+  websocket.onopen = function (evt) { onOpen(evt) }
+  websocket.onclose = function (evt) { onClose(evt) }
+  websocket.onmessage = function (evt) { onMessage(evt) }
+  websocket.onerror = function (evt) { onError(evt) }
+}
+
+function onOpen (evt) {
+  console.log('onOpen')
+  websocket.send(JSON.stringify({tipo:'login',conteudo:'fabio'}))
+}
+function onClose (evt) {
+}
+
+function onMessage (evt) {
+  var msg = JSON.parse(evt.data);
+  switch (msg.tipo)
+  {
+    case 'texto':
+        console.log('cliente recebeu mensagem de texto');
+        console.log('conteudo da mensagem eh:',msg.valor);
+    break;
+    case 'coordenada':
+        //console.log('Cliente recebeu mensagem de coordenada');
+       // console.log(msg.valor);
+       
+       ctx.beginPath();
+       ctx.moveTo(msg.valor[0].x,msg.valor[0].y);
+
+           for (var a=1;a < msg.valor.length;a++)
+           {
+            x = msg.valor[a].x;
+            y = msg.valor[a].y;
+            
+             //ctx.moveTo(msg.valor[a].x,msg.valor[a].y);
+             ctx.lineTo(msg.valor[a].x,msg.valor[a].y);
+             console.log(x+'  '+y);
+
+           }
+           ctx.stroke();
+ 
+          
+
+    break;
+  }
+  
+
+}
+
+
+
+function onError (evt) {
+  console.log(evt)
+}
+
+startConnection();
+
 ctx.lineJoin = 'round';
 
       function O (msg)
@@ -70,6 +134,7 @@ ctx.lineJoin = 'round';
         console.log("liberado");
         desenha=false;
         console.log(vetor);
+        websocket.send(JSON.stringify({tipo:'coordenada',valor:vetor}));
         vetor=[];
       }, false);
 
@@ -79,6 +144,9 @@ ctx.lineJoin = 'round';
           
         if (desenha)
         {   
+         // console.log({x:cfinal.x,y:cfinal.y})
+         
+
             vetor.push({x:cfinal.x,y:cfinal.y});
   ctx.lineCap = 'round';
 

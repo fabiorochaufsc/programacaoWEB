@@ -7,10 +7,6 @@ app.use(express.static(__dirname + '/public'));
  
  
 
-app.get('/', function(req, resp) {
-    console.log('Dentro da primeira parte');
-    resp.send('<H1>oi mundo</H1>');
-});
 
 app.get('/listaAlunos', function(req, resp) {
 	resp.send(alunos);
