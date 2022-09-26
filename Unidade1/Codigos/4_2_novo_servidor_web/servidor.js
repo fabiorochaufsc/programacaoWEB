@@ -4,19 +4,29 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 
 var valor=0;
+var alunos=[{matricula:123,nome:'joao'},{matricula:456,nome:'maria'}];
 
-app.get('/', function(req, resp) {
 
-    console.log('Dentro da primeira parte');
+app.get('/alunos',function(req, resp) {
 
-    resp.send('teste');
+    console.log('lista todos os alunos');
+    
+    resp.send(alunos);
     return resp.end();
 });
 
-app.get('/leiaSensor/:id', function(req, resp) {
-   console.log('Retorna o valor do sensor '+req.params.id);
-   resp.send('valor do sensor'+valor);
-   valor=valor+1;
+app.get('/alunos/:matricula', function(req, resp) {
+   console.log('Pesquisa por apenas um aluno');
+   var matricula = req.params.matricula;
+   for (var a=0;a<alunos.length;a++)
+   {
+    if (alunos[a].matricula==matricula)
+    {
+        // achou
+         resp.send(alunos[a]);
+         return resp.end();
+    }
+   }
    resp.end();
 });
 

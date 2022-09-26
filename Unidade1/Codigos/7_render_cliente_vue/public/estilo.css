@@ -1,0 +1,18 @@
+.table .left {
+    text-align: left;
+}
+
+.table .table td,
+.table .table th {
+    border: 1;
+    font-weight: 300;
+}
+
+.table tr:nth-child(odd) {
+    background-color: hsl(216, 87%, 69%);
+}
+
+.table th,
+.table tr:nth-child(even)  {
+    background-color: #66d8ac;
+}

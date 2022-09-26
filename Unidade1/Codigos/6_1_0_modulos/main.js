@@ -1,6 +1,10 @@
 
-var hello = require('./src/hello');
+var abc = require('./src/hello');
 
 
-hello('Olá pessoal!');
+abc.func1('ana');
+
+abc.func2('joao','silva');
+
+
 

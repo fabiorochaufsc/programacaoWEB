@@ -1,3 +1,5 @@
  1) browserify math.js add.js -o bundle.js
  2) sudo npm install -g uglify-js
-    browserify math.js add.js | uglifyjs > bundle.js
+    browserify math.js add.js | uglifyjs > tudo2.js
+
+3) browserify math.js add.js | terser --compress --mangle > tudo3.js

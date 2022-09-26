@@ -1,0 +1,21 @@
+
+  {{#if mostraTitulo}}
+    <h1>Lista alunos</h1>
+  {{/if}}
+
+<table class="table" cellspacing="1">
+
+
+<tbody>
+     <tr>
+           <th class="left">Nome</th>
+           <th class="left">Idade</th>
+      </tr>
+  {{#each alunos}}
+  <tr>
+    <td>{{nome}}</td><td>{{idade}}</td>
+  </tr>
+  {{/each}}
+</tbody>
+
+</table>

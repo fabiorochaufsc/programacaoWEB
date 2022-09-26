@@ -1,6 +1,6 @@
 
 function MeuObjeto () {
-
+	console.log('iniciou...');
 }
 
 MeuObjeto.prototype.metodo1 = function (x)

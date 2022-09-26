@@ -3,6 +3,8 @@ var express = require('express')
 var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
+var cors = require('cors')
+app.options('*', cors()) // include before other routes
 
 app.use(express.static(__dirname + '/public'));
 
@@ -16,7 +18,7 @@ app.get(/^(.+)$/, function(req, res) {
     }
 })
 
-app.listen(8000, function() {
+app.listen(12000, function() {
     console.log("servidor no ar");
 });
 
@@ -24,7 +26,7 @@ app.listen(8000, function() {
 
 var vetorClientes = [];
 
-const wss = new WebSocket.Server({ port: 10000 },function (){
+const wss = new WebSocket.Server({ port: 13000 },function (){
 	console.log('rodando');
 });
 var contador = 0;

@@ -63,7 +63,7 @@ function fazConexao()
 {
     O('identificacao').style.display='none';
     var nome = O('nome').value;
-    conectaServidorSockets('ws://'+window.location.hostname+':10000', nome);
+    conectaServidorSockets('ws://'+window.location.hostname+':13000', nome);
 
     var salva = {ID:nome,PASS:''};
     localStorage.setItem('meusSettings',JSON.stringify(salva));

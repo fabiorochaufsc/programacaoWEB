@@ -35,7 +35,7 @@ app.get("/messages", (req, res) => {
 
         for (let x=0;vetorClientes.length;x++)
         {
-          let dados = {type:'location',value:"teste123" };
+          let dados = {type:'location',value:vetorClientes.length };
           vetorClientes[x].send(dados)
         }
 

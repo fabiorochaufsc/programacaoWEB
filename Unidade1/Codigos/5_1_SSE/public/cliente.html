@@ -21,7 +21,7 @@ function GET (x)
 xhr.open('GET', x)
 xhr.send();
 }
-var messages = new EventSource("http://localhost:8080/messages");
+var messages = new EventSource("http://localhost:4000/messages");
 
 messages.onopen = function(ev)
 {

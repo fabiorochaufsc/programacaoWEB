@@ -1,5 +1,5 @@
 
-var servidorWebserver= 'wss://apps4fun.duckdns.org:8000/chat'
+var servidorWebserver= 'ws://localhost:8000'
 
 var websocket
 

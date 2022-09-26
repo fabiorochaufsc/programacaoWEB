@@ -5,6 +5,16 @@
 	hello('oi mundo');
 */
 
-module.exports = function(msg) {
-	console.log(msg);
-};
+function func1 (nome)
+{
+	console.log('nome='+nome);
+}
+
+function func2 (nome, sobrenome)
+{
+	console.log('nome completo='+nome+' '+sobrenome);
+}
+
+
+module.exports = {func1,
+func2};
