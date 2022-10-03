@@ -1,0 +1,16 @@
+{
+  "name": "exemplo-redis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "modelo-pub-sub1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-redis-pubsub": "^4.0.0",
+    "redis": "^3.0.2"
+  }
+}

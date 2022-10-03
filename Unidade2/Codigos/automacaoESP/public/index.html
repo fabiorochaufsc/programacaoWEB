@@ -1,0 +1,28 @@
+
+<html>
+
+<body>
+    <button id="botao1" > LIGA </button>
+    <button id="botao2" > DESLIGA </button>
+
+
+    <script>
+
+        function GET (dado)
+        {
+            var xhttp = new XMLHttpRequest();
+            if (dado=='A') xhttp.open("GET", "http://localhost:3000/botao/A", true);
+            else xhttp.open("GET", "http://localhost:3000/botao/B", true);
+            xhttp.send();
+        }
+        document.getElementById('botao1').addEventListener('click',function(){
+            GET('A');
+        },false);
+        
+        document.getElementById('botao2').addEventListener('click',function(){
+            GET('B');
+        },false);
+
+    </script>
+</body>
+</html>

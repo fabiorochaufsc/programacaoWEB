@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Exemplo de uso de Mapa</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+	integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+	crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+	integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+	crossorigin=""></script>
+
+</head>
+<body>
+
+
+
+<div id="mapid" style="width: 100%; height: 400px;"></div>
+
+<div id="coordenadas"></div>
+
+<div>
+		Nome: <input type="text" id="nome">
+		Localização: <span id="localizacaoSalva"></span>
+		<button id="envia"> Envia</button>
+		<button id="solicita"> Solicita Coordenadas</button>
+		
+</div>
+<script>
+	var coordenadas={lat:0, lng:0};
+	var mymap = L.map('mapid').setView([-28.951217, -49.467730], 18);
+	
+
+
+
+
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoiZmFiaW9yb2NoYTEyMyIsImEiOiJja3I2OXg0eGozZGppMnBtZjFybzNsZzk4In0.4u5UbofrVzcEEhy8fir3lQ'
+}).addTo(mymap);
+
+
+mymap.on('click', function(ev) {
+	
+    console.log(ev.latlng); // ev is an event object (MouseEvent in this case)
+	coordenadas.lat = ev.latlng.lat;
+	coordenadas.lng = ev.latlng.lng;
+	document.getElementById('localizacaoSalva').innerHTML = '  '+coordenadas.lat+'  '+coordenadas.lng;
+
+
+});
+
+
+function O (id)
+{
+	return document.getElementById(id);
+}
+function POST (text)
+{
+	var xhttp = new XMLHttpRequest();
+
+	
+	xhttp.open("POST", "/envia", true);
+	xhttp.setRequestHeader('Content-type', 'application/json');
+
+	xhttp.send(JSON.stringify(text));
+
+}
+
+function GET (text,cb)
+{
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			cb(null, xhttp.responseText)
+		}
+	};
+	
+	xhttp.open("GET", text, true);
+	xhttp.send();
+
+}
+
+O('envia').addEventListener('click',function(){
+		alert('envia');
+		var desc = O('nome').value;
+		var lat  = coordenadas.lat;
+		var lng  = coordenadas.lng;
+		POST({desc:desc, lat:lat, lng:lng});
+},false);
+
+O('solicita').addEventListener('click',function(){
+		
+		GET("/pegaTodas",function(erro, dado){
+			console.log(dado);
+			var latlngs=[];
+			for (let a = 0; a< dado.length;a++)
+			{
+				//latlngs[a]=[dado[a].lat,dado[a].lng];
+			}
+
+			var polyline = L.polyline(latlngs, {color: 'red'}).addTo(mymap);
+		});
+},false);
+
+</script>
+
+
+
+</body>
+</html>
