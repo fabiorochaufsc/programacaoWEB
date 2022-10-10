@@ -1,32 +1,16 @@
 const redis = require("redis");
 
-const subscriber = redis.createClient();
+(async () => {
 
-subscriber.on('connect', function() {
-    console.log('conectou no servidor redis');
-});
+  const client = redis.createClient();
 
+  const subscriber = client.duplicate();
 
+  await subscriber.connect();
 
-subscriber.on("message", function(channel, message) {
+  await subscriber.subscribe('log', (message) => {
+    console.log(message); // 'message'
+  });
 
-  console.log(channel)
-  switch (channel)
-  {
-    case 'adm':
-      console.log('recebeu adm : '+message);
-      break;
-    case 'erro':
-      console.log('recebeu erro: '+message);
-      break;
-    case 'log':
-        console.log('recebeu log: '+message);
-
-
-  }
-
-});
-
-
-subscriber.subscribe("log");
+})();
 

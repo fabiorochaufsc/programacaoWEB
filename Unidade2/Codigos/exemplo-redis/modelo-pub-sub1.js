@@ -7,7 +7,7 @@ publisher.on('connect', function() {
 });
 
 var x=0
-setTimeout(function(){
+setInterval(function(){
 
   console.log('envia')
   publisher.publish("log", x);
