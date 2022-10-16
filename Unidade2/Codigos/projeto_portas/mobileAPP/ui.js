@@ -3,6 +3,10 @@ function O(id)
 {
   return document.getElementById(id);
 }
+PubSub.subscribe('desconectou', function (msg, data) {
+  O('salas').innerHTML='';
+
+});
 
 
 PubSub.subscribe('init', function (msg, data) {
@@ -10,9 +14,11 @@ PubSub.subscribe('init', function (msg, data) {
     console.log('Modulo UI inicializado');
 
     O('botaoEnvia').addEventListener('click',function(){
-        var id = O('ID').value;
-        var password = O('PASSWD').value;
-        PubSub.publish('login', {tipo:'login',id:id, passwd:password});
+        credenciais={id:'',password:''};
+        credenciais.id = O('ID').value;
+        credenciais.password= O('PASSWD').value;
+        console.log(credenciais)
+        PubSub.publish('login', {tipo:'login',id:credenciais.id, passwd:credenciais.password});
     },false);
   
 
@@ -26,5 +32,5 @@ PubSub.subscribe('salas', function (msg, data) {
       console.log('Solicita a abertura da sala '+data.salas)
       PubSub.publish('abre', {identificacaoPorta:data.salas});
     },false);
-    document.body.appendChild(btn);
+    O('salas').appendChild(btn);
 });

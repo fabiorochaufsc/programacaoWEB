@@ -1,7 +1,16 @@
 var express = require('express')
 var app = express();
 
+function testeapp()
+{
+    chama();
+}
 
+app.get('/teste', function(req, resp) {
+
+    
+    process.exit();
+});
 
 
 app.get('/erro', function(req, resp) {

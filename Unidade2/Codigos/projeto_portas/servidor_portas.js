@@ -12,8 +12,7 @@ var fechaduras=[];
 
 MongoClient.connect(url, {useUnifiedTopology: true, useNewUrlParser: true}, function(err, db) {
   if (err) throw err
-  var query = { nome: 'Fabio Rocha' }
-   dbo = db.db("gerenciasalas");
+   dbo = db.db("DB_fechaduras");
   console.log('conectado no BD')
   
 })
@@ -40,15 +39,31 @@ wss.on('connection', function (ws) {
 						console.log(message.passwd);
 						ws.fechadura=1;
 						ws.id = message.id;
-						fechaduras.push(ws);
+						dbo.collection('fechaduras').findOne({ _id: message.id },function (err, result) {
+							if (result==null)
+							{
+									console.log('fechadura nao pode se logar na rede')
+							}
+							else{
+								if (result.senha==message.passwd)
+								{
+									console.log('ok, senha correta');
+									ws.dados = result;
+									fechaduras.push(ws);
+								}
+							}
+							 
+						  })
+						
 					break;
 				case 'abre':
 						if (ws.validado)
 						{
 							console.log(message.identificacaoPorta);
 							for (let a=0; a<fechaduras.length;a++)
-							{
-								if (fechaduras[a].id == message.identificacaoPorta)
+							{   
+								
+								if (fechaduras[a].dados.localizacao == message.identificacaoPorta)
 								{
 									fechaduras[a].send(JSON.stringify({tipo:'abre'}));
 								}
@@ -62,15 +77,15 @@ wss.on('connection', function (ws) {
 							if (erro)
 							{
 								console.log(erro)
-								ws.send(JSON.stringify({erro:erro}));
+								ws.send(JSON.stringify({tipo:'falhaLogin'}));
 								ws.close();
 							}
 							else 
 							{
 								ws.validado=1;
-								ws.salas = msg.listaPortas;
+								ws.salas = msg.portas;
 								clientesConectados.push(ws);
-								ws.send(JSON.stringify({salas:msg.listaPortas}));
+								ws.send(JSON.stringify({tipo:'listaSalas',salas:msg.portas}));
 							}
 
 

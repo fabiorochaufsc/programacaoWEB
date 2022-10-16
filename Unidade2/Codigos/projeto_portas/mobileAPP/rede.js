@@ -9,32 +9,38 @@ var websocket
 
 PubSub.subscribe('init', function (msg, data) {
 
-    console.log('Modulo rede inicializado');
+    console.log('Modulo rede inicializado2');
 
     websocket = new ReconnectingWebSocket(servidorWebserver)
     websocket.onopen = function (evt) { 
+      console.log('conectou');
+      if (typeof(credenciais) != "undefined")        PubSub.publish('login', {tipo:'login',id:credenciais.id, passwd:credenciais.password});
+
      }
     websocket.onclose = function (evt) { 
-  
+      PubSub.publish('desconectou', {});
     }
     websocket.onmessage = function (evt) { 
       let msg = JSON.parse(evt.data);
-  
-      if (msg.erro)
+      switch (msg.tipo)
       {
-        PubSub.publish('erro', {});
-
-      }
-      else{
-
-        for (let a = 0 ; a< msg.salas.length; a++)
+        case 'falhaLogin':
+          console.log('falhaLogin');
+           credenciais=undefined;
+          break;
+        case 'listaSalas':
+          for (let a = 0 ; a< msg.salas.length; a++)
         {
             PubSub.publish('salas', {salas:msg.salas[a]});
 
        
   
         }
+          break;
+
       }
+  
+      
       
   
   

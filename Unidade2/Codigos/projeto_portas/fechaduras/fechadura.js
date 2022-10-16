@@ -32,6 +32,16 @@ client.on('connect', function(connection) {
     connection.on('message', function(message) {
         let dados = JSON.parse(message.utf8Data);
 
+        switch (dados.tipo)
+        {
+            case 'abre':
+                // aciona solenoide
+                console.log('Abre a fechadura');
+                break;
+            case 'falha':
+                // aciona buzina
+                break;  
+        }
         console.log('Fechadura abre a porta ')
        
         

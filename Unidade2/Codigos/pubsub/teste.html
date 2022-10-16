@@ -1,18 +1,28 @@
 <html>
  	<body>
-    <button id="envia">ENVIA DADOS</button>
+    
+    <div id="areaCredenciais">
+    <button id="credenciais">ENVIA DADOS</button>
     <input  id="id"       type="text" >
     <input  id="password" type="password" >
-    
+    </div>
     </body>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script type="text/javascript" src="pubsub.js"></script>
 <script type="text/javascript" src="ui.js"></script>
 <script type="text/javascript" src="bd.js"></script>
 <script type="text/javascript" src="rede.js"></script>
+<script type="text/javascript" src="users.js"></script>
+
 
 <script>
-          PubSub.publish('init', '');
+    document.addEventListener("DOMContentLoaded",function(){
+        PubSub.publish('init', '');
+
+    });
+
 
 </script>
 
