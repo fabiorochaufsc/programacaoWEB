@@ -1,0 +1,184 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<div id="app">
+
+
+    <table id="listaTCC">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Titulo</th>
+                <th>Aluno</th>
+                <th>orientador</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr  @click="mostra(item)"  v-for="(item, index) in defesa">
+                <td >{{ index+1 }}</td>
+                <td >{{ item.title }}</td>
+                <td >{{ item.nome }}</td>
+                <td >{{ item.orientador }}</td>             
+            </tr>
+        </tbody>
+    </table>
+    
+
+</div>
+
+
+<script>
+  const { createApp } = Vue
+
+function carrega(cb) {
+    fetch('http://localhost:3000/listaDefesas').then(function (response) {
+	return response.json();
+}).then(function (data) {
+    return cb(undefined,data)
+}).catch(function (err) {
+	console.warn('Something went wrong.', err);
+});
+
+
+
+
+
+}
+  createApp({
+    data() {
+      return {
+        defesa:'',
+      }
+    },
+    methods: {
+        mostra(item){
+            console.log("selecionou trabalho "+item._id)
+            
+            
+        }
+    },
+    mounted: function() {
+       carrega(function(err,valor){
+        this.defesa=valor
+       }.bind(this));
+  }
+  }).mount('#app')
+</script>
+
+
+<style scoped>
+    textarea {
+        resize: none;
+    }
+
+    p {
+        margin-top: 0px;
+        /* between paragraphs */
+
+        margin-bottom: 10px;
+        /* between paragraphs */
+    }
+
+    textarea {
+
+        resize: none;
+    }
+
+    p {
+        margin-top: 0px;
+        /* between paragraphs */
+
+        margin-bottom: 0px;
+        /* between paragraphs */
+    }
+
+    #box {
+        padding: 20px;
+    }
+
+    #listaTCC {
+
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+
+    }
+
+    #listaTCC tr th,
+    #listaTCC tr td {
+        border-right: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
+        padding: 5px;
+
+    }
+
+    #listaTCC tr th:first-child,
+    #listaTCC tr td:first-child {
+        border-left: 1px solid #bbb;
+    }
+
+    #listaTCC tr th {
+        background: #eee;
+        border-top: 1px solid #bbb;
+        text-align: left;
+    }
+
+
+
+   
+
+    #listaTCC th {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        text-align: left;
+        background-color: blue;
+        color: gray;
+    }
+
+    /* top-left border-radius */
+    table tr:first-child th:first-child {
+        border-top-left-radius: 6px;
+    }
+
+    /* top-right border-radius */
+    table tr:first-child th:last-child {
+        border-top-right-radius: 6px;
+    }
+
+    /* bottom-left border-radius */
+    table tr:last-child td:first-child {
+        border-bottom-left-radius: 6px;
+    }
+
+    /* bottom-right border-radius */
+    table tr:last-child td:last-child {
+        border-bottom-right-radius: 6px;
+    }
+
+    .modal-dialog {
+        background-color: gray;
+    }
+
+
+
+.depositado {
+  background-color: #b8e6bf;
+}
+
+.defendido {
+  background-color: #f0f6fc;
+}
+
+.aguardandodoc {
+  background-color: #9ec2e6;
+
+}
+
+.naoDefendido {
+  background-color: #fcf0f1;
+
+}
+
+.text-center {
+  text-align: center;
+}
+</style>
