@@ -3,7 +3,10 @@ var app         = express();
 var bodyParser  = require('body-parser');
 var http = require('http')
 
-app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 app.use(express.static(__dirname + '/public'));
 app.get('/', function (req, resp) {
   resp.write("teste");
@@ -11,10 +14,12 @@ app.get('/', function (req, resp) {
 });
 
 ///  http://localhost:3000/FCM?id=123
-app.get('/FCM', function (req, resp) {
+app.post('/FCM', function (req, resp) {
 
-  let id     = req.query.id;
-  console.log('recebido:'+id);
+  console.log(req.body);
+  let id     = req.query.nome;
+  let endereco = req.query.endereco;
+  console.log('recebido:'+id+'  '+endereco);
   return resp.end();
 });
 
