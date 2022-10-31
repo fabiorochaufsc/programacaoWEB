@@ -1,0 +1,71 @@
+<html>
+  <header>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  </header>
+	oi mundo
+
+  <label>Username:</label>
+  <input type="text" name="username" id="id" ><br><br>
+  <label>Password:</label>
+  <input type="text" name="password" id="passwd" ><br><br>
+  <button onclick="fazLogin()">LOGIN</button>
+  <button onclick="testa()">Acessa recurso protegido</button>
+  <button onclick="fazLogout()">LOGOUT</button>
+
+  
+  
+<script>
+
+function fazLogout ()
+{
+  console.log('Logout')
+  axios.defaults.headers.common['x-access-token'] = '';
+}
+
+function testa ()
+{
+  
+  axios.get('/teste')
+    .then(function(res){
+      console.log(res.data);  
+      
+    })
+    .catch(function(err)
+    {
+      console.log('Nao autorizado');
+
+    })
+}
+
+function O(id)
+{
+	return document.getElementById(id);
+}
+
+
+  function fazLogin() {
+    let username = O("id").value;
+    let password = O("passwd").value;
+    
+    axios.post('/login', { username: username,password:password })
+    .then(function(res){
+      console.log(res.data.token);  
+      if (res.data.token)
+      {
+        console.log('Autorizado');
+        axios.defaults.headers.common['x-access-token'] = res.data.token;
+
+      }
+    })
+    .catch(function(err)
+    {
+      console.log('Nao autorizado');
+
+    })
+
+    
+   
+}
+</script>
+</html>
