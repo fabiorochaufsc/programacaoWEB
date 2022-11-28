@@ -12,10 +12,26 @@
   <button onclick="fazLogin()">LOGIN</button>
   <button onclick="testa()">Acessa recurso protegido</button>
   <button onclick="fazLogout()">LOGOUT</button>
+  <button onclick="location.href='/criaConta.html'">CRIA CONTA</button>
 
   
   
 <script>
+
+function CriaConta ()
+{
+  axios.get('/criaConta')
+    .then(function(res){
+      console.log(res.data);  
+      
+    })
+    .catch(function(err)
+    {
+      console.log('Nao autorizado');
+
+    })
+}
+
 
 function fazLogout ()
 {

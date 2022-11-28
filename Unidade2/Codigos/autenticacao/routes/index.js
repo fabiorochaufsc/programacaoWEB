@@ -19,7 +19,11 @@ function auth(req, res, next){
     });
 
 }
+router.post('/criaConta',function (request, response, next) {
 
+  console.log('recebeu criaConta');
+response.redirect('criaConta.html')
+});
 router.get('/teste',auth,function (request, response, next) {
 
   console.log("Usuario "+request.username+" acessou o recurso teste");
