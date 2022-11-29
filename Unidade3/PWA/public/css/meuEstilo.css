@@ -1,0 +1,19 @@
+
+body {
+    color:blue;
+}
+
+#bloco1 {
+	background-color:green;
+}
+
+#bloco2 {
+	background-color:yellow;
+}
+
+
+.centraliza {
+	  display: block;
+	  margin-left: auto;
+	  margin-right: auto;
+}
