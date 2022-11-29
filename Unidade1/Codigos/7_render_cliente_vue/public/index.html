@@ -11,13 +11,14 @@
 
 <BODY>
     <div id="app">
-        Lista de Alunos
-        <table class="table">
-            <tr v-for="aluno in alunos">
-                <td>{{ aluno.nome }}</td>
-                <td> {{ aluno.idade }}</td>
-            </tr>
-        </table>
+        Um botao para cada aluno:
+
+        <div v-for="botao in alunos">
+            <button onclick="vm.chama(this)"> {{ botao.nome}}</button>
+        </div>
+
+        {{ mensagem }}
+        
     </div>
 </BODY>
 

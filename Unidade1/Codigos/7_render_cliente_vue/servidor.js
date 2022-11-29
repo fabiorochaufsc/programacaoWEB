@@ -12,6 +12,12 @@ app.get('/listaAlunos', function(req, resp) {
 	resp.send(alunos);
 });
 
+app.get('/infoAluno', function(req, resp) {
+    let id = req.query.id;
+    console.log('solicita info sobre o aluno '+id)
+    resp.send(alunos);
+});
+
 
 app.get(/^(.+)$/, function(req, res) {
     try {
